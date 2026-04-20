@@ -45,19 +45,10 @@ io.on('connection', (socket) => {
   });
 });
 
-// Health check
-// Serve Static Frontend for Production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
-  });
-} else {
-  app.get('/', (req, res) => {
-    res.send('ExpenseLeak AI Backend Running (Dev Mode)');
-  });
-}
+// Health check & Home
+app.get('/', (req, res) => {
+  res.send('ExpenseLeak AI API is Running...');
+});
 
 // Database connection
 const PORT = process.env.PORT || 5000;
